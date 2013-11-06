@@ -21,12 +21,15 @@ public abstract class EotlScreen {
 	public final void init (EndOfTheLine eotl) {
 		this.eotl = eotl;
 		Matrix4 projection = new Matrix4();
-		projection.setToOrtho(0, 1280, 1240, 0, -1, 1);
+		projection.setToOrtho(0, 1280, 800, 0, -1, 1);
 
 		spriteBatch = new SpriteBatch(100);
 		spriteBatch.setProjectionMatrix(projection);
+		portInit();
 	}
-
+	
+	public abstract void portInit(); // we realy need that, notch;
+	
 	protected void setScreen (EotlScreen eotlScreen) {
 		eotl.setScreen(eotlScreen);
 	}

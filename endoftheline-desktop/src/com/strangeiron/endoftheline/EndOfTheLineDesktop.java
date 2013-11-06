@@ -1,9 +1,5 @@
 package com.strangeiron.endoftheline;
 
-
-import java.awt.Dimension;
-import java.awt.Toolkit;
-
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.strangeiron.endoftheline.EndOfTheLine;
@@ -18,7 +14,7 @@ public class EndOfTheLineDesktop {
 		cfg.title = "ERROR: <End of the line> | ver: " + VERSION + " & Build: " + BUILD;
 		cfg.useGL20 = true;
 		cfg.width = 1280;
-		cfg.height = 1024;
+		cfg.height = 800;
 		cfg.fullscreen = false;
 		cfg.vSyncEnabled = false;
 		

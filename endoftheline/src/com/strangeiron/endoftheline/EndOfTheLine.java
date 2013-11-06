@@ -4,20 +4,15 @@ package com.strangeiron.endoftheline;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.strangeiron.endoftheline.screen.EotlGameScreen;
 import com.strangeiron.endoftheline.screen.EotlScreen;
 
 public class EndOfTheLine implements ApplicationListener {
 	public static final int GAME_WIDTH = 1280;
-	public static final int GAME_HEIGHT = 1240;
+	public static final int GAME_HEIGHT = 800;
 
-	private static final long serialVersionUID = 1L;
-
-	private boolean running = false;
 	private EotlScreen screen;
 	private final EotlInputManager input = new EotlInputManager();
-	private final boolean started = false;
 	private float accum = 0;
 
 	@Override
@@ -25,18 +20,15 @@ public class EndOfTheLine implements ApplicationListener {
 		EotlResourcesManager.load();
 		//Sound.load();
 		Gdx.input.setInputProcessor(input);
-		running = true;
 		setScreen(new EotlGameScreen());
 	}
 
 	@Override
 	public void pause () {
-		running = false;
 	}
 
 	@Override
 	public void resume () {
-		running = true;
 	}
 
 	public void setScreen (EotlScreen newScreen) {
@@ -60,7 +52,7 @@ public class EndOfTheLine implements ApplicationListener {
 		screen.render();
 		
 		screen.spriteBatch.begin();
-		EotlResourcesManager.font.draw(screen.spriteBatch, "fps: " + Gdx.graphics.getFramesPerSecond(), 10, 30);
+		EotlResourcesManager.font.draw(screen.spriteBatch, "fps: " + Gdx.graphics.getFramesPerSecond(), 5, 10);
 		screen.spriteBatch.end();
 	}
 
