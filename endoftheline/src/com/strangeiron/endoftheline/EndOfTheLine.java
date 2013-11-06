@@ -22,7 +22,7 @@ public class EndOfTheLine implements ApplicationListener {
 
 	@Override
 	public void create () {
-		EotlResources.load();
+		EotlResourcesManager.load();
 		//Sound.load();
 		Gdx.input.setInputProcessor(input);
 		running = true;
@@ -60,7 +60,7 @@ public class EndOfTheLine implements ApplicationListener {
 		screen.render();
 		
 		screen.spriteBatch.begin();
-		EotlResources.font.draw(screen.spriteBatch, "fps: " + Gdx.graphics.getFramesPerSecond(), 10, 30);
+		EotlResourcesManager.font.draw(screen.spriteBatch, "fps: " + Gdx.graphics.getFramesPerSecond(), 10, 30);
 		screen.spriteBatch.end();
 	}
 

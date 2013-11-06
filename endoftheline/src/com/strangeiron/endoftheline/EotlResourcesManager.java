@@ -3,7 +3,7 @@ package com.strangeiron.endoftheline;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
-public class EotlResources {
+public class EotlResourcesManager {
 	
 	public static BitmapFont font;
 	
