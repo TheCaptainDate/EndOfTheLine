@@ -8,7 +8,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.strangeiron.endoftheline.EndOfTheLine;
 
-public class Main {
+public class EndOfTheLineDesktop {
 	
 	private static final String VERSION = "0.0.1";
 	private static final String BUILD = "1";
