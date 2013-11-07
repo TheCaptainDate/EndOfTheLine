@@ -7,7 +7,7 @@ import com.strangeiron.endoftheline.protocol.EotlEntityUpdatePacket;
 
 public class EotlEntityManager {
 	private static EotlEntityManager __instance = new EotlEntityManager();
-	private HashSet<EotlEntity> entites = new HashSet<EotlEntity>();
+	private HashMap<Integer, EotlEntity> entites = new HashMap<Integer, EotlEntity>();
 	
 	private EotlEntityManager() {
 	}
@@ -19,19 +19,19 @@ public class EotlEntityManager {
 	
 	public void spawnEntity(EotlEntity ent)
 	{
-		entites.add(ent);
+		entites.put(1, ent);
 	}
 	
 	public void tick()
 	{
-		for(EotlEntity ent : entites) {
+		for(EotlEntity ent : entites.values()) {
 			ent.tick();
 		}
 	}
 	
 	public void render()
 	{
-		for(EotlEntity ent : entites) {
+		for(EotlEntity ent : entites.values()) {
 			ent.render();
 		}
 	}
@@ -39,11 +39,9 @@ public class EotlEntityManager {
 	public void registerEntity(HashMap<String, String> data) {
 		// @TODO: enum?!
 		String type = data.get("type");
-		System.out.println(type);
 		
 		if(type.equals("Character"))
 		{
-			System.out.println("R@P");
 			EotlCharacter character = new EotlCharacter();
 			character.x = Float.parseFloat(data.get("x"));
 			character.y = Float.parseFloat(data.get("y"));
@@ -51,5 +49,17 @@ public class EotlEntityManager {
 			spawnEntity(character);
 		}
 		
+	}
+
+	public void updateEntity(HashMap<String, String> data) {
+		String type = data.get("type");
+		
+		if(type.equals("Character"))
+		{
+			EotlCharacter character = (EotlCharacter) entites.get(1);
+			character.x = Float.parseFloat(data.get("x"));
+			character.y = Float.parseFloat(data.get("y"));
+			
+		}
 	}
 }

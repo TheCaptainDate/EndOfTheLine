@@ -43,7 +43,13 @@ public class EotlNetwork {
              public void received (Connection connection, Object object) {
                    if(object instanceof EotlEntityUpdatePacket)
                    {
-                	  entityManager.registerEntity(((EotlEntityUpdatePacket) object).data);
+                	   System.out.println("update");
+                	   String action = ((EotlEntityUpdatePacket) object).data.get("action");
+                	   if(action.equals("update")) {
+                		   entityManager.updateEntity(((EotlEntityUpdatePacket) object).data);
+                	   } else if (action.equals("register")) {
+                		   entityManager.registerEntity(((EotlEntityUpdatePacket) object).data);
+                	   }
                    }
              }
 
