@@ -1,6 +1,8 @@
 package com.strangeiron.endoftheline;
 
+import java.io.EOFException;
 import java.io.IOException;
+import java.util.HashMap;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Client;
@@ -8,14 +10,17 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.EndPoint;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Listener.ThreadedListener;
+import com.strangeiron.endoftheline.entity.EotlEntityManager;
+import com.strangeiron.endoftheline.protocol.EotlEntityUpdatePacket;
 import com.strangeiron.endoftheline.protocol.EotlLoginPacket;
 
 public class EotlNetwork {
 
 	private static EotlNetwork __instance = new EotlNetwork();
 	private Client client;
+	private final EotlEntityManager entityManager = EotlEntityManager.GetInstance();
 	
-	public EotlNetwork() {
+	private EotlNetwork() {
 	}
 	
 	public static EotlNetwork GetInstance() 
@@ -32,11 +37,14 @@ public class EotlNetwork {
 		
 		 client.addListener(new ThreadedListener(new Listener() { // должен ли листенер быть тут?
              public void connected (Connection connection) {
-            	 System.out.println("YO BITCH!");
+
              }
 
              public void received (Connection connection, Object object) {
-                   
+                   if(object instanceof EotlEntityUpdatePacket)
+                   {
+                	  entityManager.registerEntity(((EotlEntityUpdatePacket) object).data);
+                   }
              }
 
              public void disconnected (Connection connection) {
@@ -66,5 +74,7 @@ public class EotlNetwork {
 	{
 		Kryo kryo = endpoint.getKryo();
 		kryo.register(EotlLoginPacket.class);
+		kryo.register(HashMap.class);
+		kryo.register(EotlEntityUpdatePacket.class);
 	}
 }
