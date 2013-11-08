@@ -25,10 +25,8 @@ public abstract class EotlScreen {
 
 		spriteBatch = new SpriteBatch(100);
 		spriteBatch.setProjectionMatrix(projection);
-		portInit();
+		postInit();
 	}
-	
-	public abstract void portInit(); // we realy need that, notch;
 	
 	protected void setScreen (EotlScreen eotlScreen) {
 		eotl.setScreen(eotlScreen);
@@ -40,8 +38,10 @@ public abstract class EotlScreen {
 		spriteBatch.draw(region, x, y, width, region.getRegionHeight());
 	}
 
-	public abstract void render ();
+        public abstract void postInit(); // we realy need that, notch;
+        
+	public abstract void render();
 
-	public void tick (EotlInputManager input) {
+	public void tick(EotlInputManager input) {
 	}
 }
