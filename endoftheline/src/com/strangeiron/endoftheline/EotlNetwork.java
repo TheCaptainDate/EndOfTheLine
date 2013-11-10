@@ -57,7 +57,8 @@ public class EotlNetwork {
                    
                    if(object instanceof EotlGlobalUpdatePacket)
                    {
-                       
+                       EotlGlobalUpdatePacket packet = (EotlGlobalUpdatePacket) object;
+                       //EotlEntityManager.sinchronization();
                    }
              }
 
@@ -74,6 +75,7 @@ public class EotlNetwork {
             {
                 EotlKeysUpdatePacket packet = new EotlKeysUpdatePacket();
                 packet.buttons = input.buttons;
+                packet.charId = EotlEntityManager.localPlayer.character.id;
                 client.sendTCP(packet);
             }
         }

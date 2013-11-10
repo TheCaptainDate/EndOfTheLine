@@ -1,5 +1,6 @@
 package com.strangeiron.endoftheline.entity;
 
+import com.strangeiron.endoftheline.EotlInputManager;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -7,18 +8,18 @@ import com.strangeiron.endoftheline.protocol.EotlEntityUpdatePacket;
 
 public class EotlEntityManager {
     private static HashMap<Integer, EotlEntity> entites = new HashMap<Integer, EotlEntity>();
+    public static EotlLocalPlayer localPlayer;
 
-
-    public static void spawnEntity(EotlEntity ent)
+    public static void spawnEntity(EotlEntity ent, int id)
     {
-        entites.put(1, ent);
+        entites.put(id, ent);
     }
 
-    public static void tick()
+    public static void tick(float delta, EotlInputManager input)
     {
         for(EotlEntity ent : entites.values()) {
-            ent._tick();
-            ent.tick();
+            ent._tick(delta, input);
+            ent.tick(delta, input);
         }
     }
 
@@ -37,14 +38,29 @@ public class EotlEntityManager {
     public static void registerEntity(HashMap<String, String> data) {
         // @TODO: enum?!
         String type = data.get("type");
-
+        System.out.println(data.toString());
         if(type.equals("Character"))
         {
             EotlCharacter character = new EotlCharacter();
             character.x = Float.parseFloat(data.get("x"));
             character.y = Float.parseFloat(data.get("y"));
-
-            spawnEntity(character);
+            character.id = Integer.parseInt(data.get("id"));
+            
+            spawnEntity(character, character.id);
+            return;
+        }
+        
+        if(type.equals("LocalCharacter"))
+        {
+            EotlCharacter character = new EotlCharacter();
+            character.x = Float.parseFloat(data.get("x"));
+            character.y = Float.parseFloat(data.get("y"));
+            character.id = Integer.parseInt(data.get("id"));
+            
+            spawnEntity(character, character.id);
+            localPlayer.character = character;
+            
+            return;
         }
     }
     
