@@ -17,7 +17,8 @@ public class EotlEntityManager {
     public static void tick()
     {
         for(EotlEntity ent : entites.values()) {
-                ent.tick();
+            ent._tick();
+            ent.tick();
         }
     }
 

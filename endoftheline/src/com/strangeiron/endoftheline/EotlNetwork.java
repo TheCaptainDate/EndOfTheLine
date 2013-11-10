@@ -13,6 +13,7 @@ import com.esotericsoftware.kryonet.Listener.ThreadedListener;
 import com.strangeiron.endoftheline.entity.EotlCharacter;
 import com.strangeiron.endoftheline.entity.EotlEntityManager;
 import com.strangeiron.endoftheline.protocol.EotlEntityUpdatePacket;
+import com.strangeiron.endoftheline.protocol.EotlGlobalUpdatePacket;
 import com.strangeiron.endoftheline.protocol.EotlKeysUpdatePacket;
 import com.strangeiron.endoftheline.protocol.EotlLoginPacket;
 
@@ -51,6 +52,12 @@ public class EotlNetwork {
                        EotlKeysUpdatePacket packet = (EotlKeysUpdatePacket) object;                     
                        EotlCharacter character = (EotlCharacter) EotlEntityManager.get(packet.charId);
                        character.buttons = packet.buttons;
+                       return;
+                   }
+                   
+                   if(object instanceof EotlGlobalUpdatePacket)
+                   {
+                       
                    }
              }
 
