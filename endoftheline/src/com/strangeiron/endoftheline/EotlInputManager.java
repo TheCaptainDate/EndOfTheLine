@@ -17,6 +17,7 @@ public class EotlInputManager implements InputProcessor {
 
 	public boolean[] buttons = new boolean[64];
 	public boolean[] oldButtons = new boolean[64];
+        public boolean updated = false;
 
 	public void set (int key, boolean down) {
 		// @TODO: добавить загрузку из конфига!!!
@@ -40,12 +41,15 @@ public class EotlInputManager implements InputProcessor {
 		if (button >= 0) {
 			buttons[button] = down;
 		}
+                
+                updated = true;
 	}
 
 	public void tick () {
 		for (int i = 0; i < buttons.length; i++) {
 			oldButtons[i] = buttons[i];
 		}
+                updated = false;
 	}
 
 	public void releaseAllKeys () {

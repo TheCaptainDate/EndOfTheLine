@@ -46,6 +46,11 @@ public class EotlEntityManager {
             spawnEntity(character);
         }
     }
+    
+    public static EotlEntity get(int id)
+    {
+        return entites.get(id);
+    }
 
     public static void updateEntity(HashMap<String, String> data) {
         String type = data.get("type");

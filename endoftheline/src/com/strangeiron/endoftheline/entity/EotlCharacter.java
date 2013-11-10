@@ -9,6 +9,7 @@ import com.strangeiron.endoftheline.screen.EotlScreen;
 public class EotlCharacter extends EotlEntity{
 
 	private ShapeRenderer shapeRenderer;
+        public boolean[] buttons;
 	
 	@Override
         public void init()

@@ -47,8 +47,9 @@ public class EndOfTheLine implements ApplicationListener {
 		accum += Gdx.graphics.getDeltaTime();
 		while (accum > 1.0f / 60.0f) {
 			screen.tick(input);
-			input.tick();
+			EotlNetwork.tick(input);
 			EotlEntityManager.tick();
+                        input.tick();
 			accum -= 1.0f / 60.0f;
                     
 		}

@@ -10,8 +10,10 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.EndPoint;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Listener.ThreadedListener;
+import com.strangeiron.endoftheline.entity.EotlCharacter;
 import com.strangeiron.endoftheline.entity.EotlEntityManager;
 import com.strangeiron.endoftheline.protocol.EotlEntityUpdatePacket;
+import com.strangeiron.endoftheline.protocol.EotlKeysUpdatePacket;
 import com.strangeiron.endoftheline.protocol.EotlLoginPacket;
 
 public class EotlNetwork {
@@ -25,28 +27,49 @@ public class EotlNetwork {
 		RegisterClasses(client);
 		
 		 client.addListener(new ThreadedListener(new Listener() { // должен ли листенер быть тут?
+             @Override
              public void connected (Connection connection) {
 
              }
 
+             @Override
              public void received (Connection connection, Object object) {
                    if(object instanceof EotlEntityUpdatePacket)
                    {
-                	   System.out.println("update");
                 	   String action = ((EotlEntityUpdatePacket) object).data.get("action");
                 	   if(action.equals("update")) {
                 		   EotlEntityManager.updateEntity(((EotlEntityUpdatePacket) object).data);
                 	   } else if (action.equals("register")) {
                 		   EotlEntityManager.registerEntity(((EotlEntityUpdatePacket) object).data);
                 	   }
+                           
+                           return;
+                   }
+                   
+                   if(object instanceof EotlKeysUpdatePacket)
+                   {
+                       EotlKeysUpdatePacket packet = (EotlKeysUpdatePacket) object;                     
+                       EotlCharacter character = (EotlCharacter) EotlEntityManager.get(packet.charId);
+                       character.buttons = packet.buttons;
                    }
              }
 
+             @Override
              public void disconnected (Connection connection) {
                      // @TODO: Вывод сообщения, выход в главное меню, etc...
              }
      }));
 	}
+        
+        public static void tick(EotlInputManager input)
+        {
+            if(input.updated)
+            {
+                EotlKeysUpdatePacket packet = new EotlKeysUpdatePacket();
+                packet.buttons = input.buttons;
+                client.sendTCP(packet);
+            }
+        }
 	
 	public static void connect(String host, int port) 
 	{
@@ -71,5 +94,7 @@ public class EotlNetwork {
 		kryo.register(EotlLoginPacket.class);
 		kryo.register(HashMap.class);
 		kryo.register(EotlEntityUpdatePacket.class);
+                kryo.register(EotlKeysUpdatePacket.class);
+                kryo.register(boolean[].class);
 	}
 }
