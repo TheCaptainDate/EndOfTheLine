@@ -6,30 +6,22 @@ import java.util.HashSet;
 import com.strangeiron.endoftheline.protocol.EotlEntityUpdatePacket;
 
 public class EotlEntityManager {
-    private static EotlEntityManager __instance = new EotlEntityManager();
-    private HashMap<Integer, EotlEntity> entites = new HashMap<Integer, EotlEntity>();
+    private static HashMap<Integer, EotlEntity> entites = new HashMap<Integer, EotlEntity>();
 
-    private EotlEntityManager() {
-    }
 
-    public static EotlEntityManager GetInstance()
-    {
-        return __instance;
-    }
-
-    public void spawnEntity(EotlEntity ent)
+    public static void spawnEntity(EotlEntity ent)
     {
         entites.put(1, ent);
     }
 
-    public void tick()
+    public static void tick()
     {
         for(EotlEntity ent : entites.values()) {
                 ent.tick();
         }
     }
 
-    public void render()
+    public static void render()
     {
         for(EotlEntity ent : entites.values()) {
             // @TODO: единый класс, хранящий граф. компоненты. Этот способ - бред. Использовать лишь временно!!!
@@ -41,7 +33,7 @@ public class EotlEntityManager {
         }
     }
 
-    public void registerEntity(HashMap<String, String> data) {
+    public static void registerEntity(HashMap<String, String> data) {
         // @TODO: enum?!
         String type = data.get("type");
 
@@ -55,7 +47,7 @@ public class EotlEntityManager {
         }
     }
 
-    public void updateEntity(HashMap<String, String> data) {
+    public static void updateEntity(HashMap<String, String> data) {
         String type = data.get("type");
 
         if(type.equals("Character"))

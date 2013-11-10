@@ -15,20 +15,9 @@ import com.strangeiron.endoftheline.protocol.EotlEntityUpdatePacket;
 import com.strangeiron.endoftheline.protocol.EotlLoginPacket;
 
 public class EotlNetwork {
-
-	private static EotlNetwork __instance = new EotlNetwork();
-	private Client client;
-	private final EotlEntityManager entityManager = EotlEntityManager.GetInstance();
+	private static Client client;
 	
-	private EotlNetwork() {
-	}
-	
-	public static EotlNetwork GetInstance() 
-	{
-		return __instance;
-	}
-	
-	public void init()
+	public static void init()
 	{
 		// Инициализация клиентского соединения
 		client = new Client();
@@ -46,9 +35,9 @@ public class EotlNetwork {
                 	   System.out.println("update");
                 	   String action = ((EotlEntityUpdatePacket) object).data.get("action");
                 	   if(action.equals("update")) {
-                		   entityManager.updateEntity(((EotlEntityUpdatePacket) object).data);
+                		   EotlEntityManager.updateEntity(((EotlEntityUpdatePacket) object).data);
                 	   } else if (action.equals("register")) {
-                		   entityManager.registerEntity(((EotlEntityUpdatePacket) object).data);
+                		   EotlEntityManager.registerEntity(((EotlEntityUpdatePacket) object).data);
                 	   }
                    }
              }
@@ -59,7 +48,7 @@ public class EotlNetwork {
      }));
 	}
 	
-	public void connect(String host, int port) 
+	public static void connect(String host, int port) 
 	{
 		try {
 			client.connect(5000, host, port);
@@ -69,14 +58,14 @@ public class EotlNetwork {
 		}
 	}
 	
-	public void sendLoginPacket() 
+	public static void sendLoginPacket() 
 	{
 		EotlLoginPacket packet = new EotlLoginPacket();
 		packet.Name = "Player1"; // TODO: система данных, способная хранить и предоставлять доступ к информации игрока
 		client.sendTCP(packet);
 	}
 	
-	private void RegisterClasses(EndPoint endpoint) // endpoint?..
+	private static void RegisterClasses(EndPoint endpoint) // endpoint?..
 	{
 		Kryo kryo = endpoint.getKryo();
 		kryo.register(EotlLoginPacket.class);

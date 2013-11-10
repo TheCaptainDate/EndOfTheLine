@@ -15,7 +15,6 @@ public class EndOfTheLine implements ApplicationListener {
 	private EotlScreen screen;
 	private final EotlInputManager input = new EotlInputManager();
 	private float accum = 0;
-	private final EotlEntityManager entityManager = EotlEntityManager.GetInstance();
 
 	@Override
 	public void create () {
@@ -49,11 +48,12 @@ public class EndOfTheLine implements ApplicationListener {
 		while (accum > 1.0f / 60.0f) {
 			screen.tick(input);
 			input.tick();
-			entityManager.tick();
+			EotlEntityManager.tick();
 			accum -= 1.0f / 60.0f;
+                    
 		}
 		screen.render();
-		entityManager.render();
+		EotlEntityManager.render();
 		
 		screen.spriteBatch.begin();
 		EotlResourcesManager.font.draw(screen.spriteBatch, "fps: " + Gdx.graphics.getFramesPerSecond(), 5, 10);
