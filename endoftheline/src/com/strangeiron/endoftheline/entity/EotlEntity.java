@@ -20,8 +20,10 @@ public abstract class EotlEntity {
     
     public void _tick(float delta, EotlInputManager input)
     {
-        x =+ xVelocity;
-        y =+ yVelocity;
+        x = x + xVelocity;
+        y = y + yVelocity;
+        xVelocity = 0;
+        yVelocity = 0;
     }
     
     public void applyForce(EotlVector2D vector)

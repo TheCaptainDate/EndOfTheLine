@@ -13,7 +13,7 @@ public class EotlGameScreen extends EotlScreen {
     @Override
     public void postInit() {
         EotlEntityManager.localPlayer = new EotlLocalPlayer();
-        EotlEntityManager.spawnEntity(EotlEntityManager.localPlayer, 0);
+        EotlEntityManager.addEntity(EotlEntityManager.localPlayer, 0);
         
         EotlNetwork.init();
         EotlNetwork.connect("127.0.0.1", 12345); // @TODO: Debug shit ;/

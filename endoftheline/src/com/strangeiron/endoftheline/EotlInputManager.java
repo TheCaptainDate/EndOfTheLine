@@ -23,18 +23,10 @@ public class EotlInputManager implements InputProcessor {
 		// @TODO: добавить загрузку из конфига!!!
 		int button = -1;
 
-		if (key == Keys.DPAD_UP) button = UP;
-		if (key == Keys.DPAD_LEFT) button = LEFT;
-		if (key == Keys.DPAD_DOWN) button = DOWN;
-		if (key == Keys.DPAD_RIGHT) button = RIGHT;
-
-		if (key == Keys.Y) button = JUMP;
-		if (key == Keys.Z) button = JUMP;
-		if (key == Keys.X) button = SHOOT;
-		if (key == Keys.C) button = JUMP;
-		if (key == Keys.A) button = JUMP;
-		if (key == Keys.S) button = SHOOT;
-		if (key == Keys.D) button = JUMP;
+		if (key == Keys.W) button = UP;
+		if (key == Keys.A) button = LEFT;
+		if (key == Keys.S) button = DOWN;
+		if (key == Keys.D) button = RIGHT;
 
 		if (key == Keys.ESCAPE || key == Keys.MENU) button = ESCAPE;
 
@@ -42,6 +34,7 @@ public class EotlInputManager implements InputProcessor {
 			buttons[button] = down;
 		}
                 
+                System.out.println(button);
                 updated = true;
 	}
 

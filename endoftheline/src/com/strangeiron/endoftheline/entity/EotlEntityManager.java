@@ -7,17 +7,24 @@ import java.util.HashSet;
 import com.strangeiron.endoftheline.protocol.EotlEntityUpdatePacket;
 
 public class EotlEntityManager {
-    private static HashMap<Integer, EotlEntity> entites = new HashMap<Integer, EotlEntity>();
+    private static EotlEntity[] entites = new EotlEntity[100];
     public static EotlLocalPlayer localPlayer;
 
-    public static void spawnEntity(EotlEntity ent, int id)
+    public static void addEntity(EotlEntity ent, int id)
     {
-        entites.put(id, ent);
+        entites[id] = ent;
+        System.out.println(ent.getClass().getName());
+        System.out.println(ent.id);
+        if(ent instanceof EotlCharacter)
+            System.out.println("asd: " + ((EotlCharacter)ent).buttons[3]);
     }
 
     public static void tick(float delta, EotlInputManager input)
     {
-        for(EotlEntity ent : entites.values()) {
+        for (int i = 0; i < entites.length; i++) {
+            EotlEntity ent = entites[i];
+            if(ent == null) continue;
+            
             ent._tick(delta, input);
             ent.tick(delta, input);
         }
@@ -25,7 +32,9 @@ public class EotlEntityManager {
 
     public static void render()
     {
-        for(EotlEntity ent : entites.values()) {
+         for (int i = 0; i < entites.length; i++) {
+             EotlEntity ent = entites[i];
+             if(ent == null) continue;
             // @TODO: единый класс, хранящий граф. компоненты. Этот способ - бред. Использовать лишь временно!!!
 
             if(ent.initiated == false) 
@@ -46,7 +55,7 @@ public class EotlEntityManager {
             character.y = Float.parseFloat(data.get("y"));
             character.id = Integer.parseInt(data.get("id"));
             
-            spawnEntity(character, character.id);
+            addEntity(character, character.id);
             return;
         }
         
@@ -57,27 +66,15 @@ public class EotlEntityManager {
             character.y = Float.parseFloat(data.get("y"));
             character.id = Integer.parseInt(data.get("id"));
             
-            spawnEntity(character, character.id);
             localPlayer.character = character;
-            
+            addEntity(character, character.id);
             return;
         }
     }
     
     public static EotlEntity get(int id)
     {
-        return entites.get(id);
-    }
-
-    public static void updateEntity(HashMap<String, String> data) {
-        String type = data.get("type");
-
-        if(type.equals("Character"))
-        {
-            EotlCharacter character = (EotlCharacter) entites.get(1);
-            character.x = Float.parseFloat(data.get("x"));
-            character.y = Float.parseFloat(data.get("y"));
-        }
+        return entites[id];
     }
 
     public static void synchronization(HashMap<String, String>[] ents) {

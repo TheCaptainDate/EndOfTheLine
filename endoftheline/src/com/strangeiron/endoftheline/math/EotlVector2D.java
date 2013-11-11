@@ -19,5 +19,10 @@ public class EotlVector2D {
         return y;
     }
     
+    public EotlVector2D multiply(float number)
+    {
+        return new EotlVector2D(x * number, y * number);
+    }
+    
     // пока другие методы не юзаем - не буду их писать. Время еще тратить :d
 }

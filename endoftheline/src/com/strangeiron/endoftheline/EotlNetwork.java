@@ -38,9 +38,7 @@ public class EotlNetwork {
                    if(object instanceof EotlEntityUpdatePacket)
                    {
                 	   String action = ((EotlEntityUpdatePacket) object).data.get("action");
-                	   if(action.equals("update")) {
-                		   EotlEntityManager.updateEntity(((EotlEntityUpdatePacket) object).data);
-                	   } else if (action.equals("register")) {
+                	   if (action.equals("register")) {
                 		   EotlEntityManager.registerEntity(((EotlEntityUpdatePacket) object).data);
                 	   }
                            
@@ -52,7 +50,8 @@ public class EotlNetwork {
                        EotlKeysUpdatePacket packet = (EotlKeysUpdatePacket) object;                     
                        EotlCharacter character = (EotlCharacter) EotlEntityManager.get(packet.charId);
                        character.buttons = packet.buttons;
-                       System.out.println(packet.buttons);
+                       EotlEntityManager.addEntity(character, packet.charId);
+                       System.out.println(packet.charId);
                        return;
                    }
                    
@@ -94,7 +93,7 @@ public class EotlNetwork {
 	public static void sendLoginPacket() 
 	{
 		EotlLoginPacket packet = new EotlLoginPacket();
-		packet.Name = "Player1"; // TODO: система данных, способная хранить и предоставлять доступ к информации игрока
+		packet.Name = "Player2"; // TODO: система данных, способная хранить и предоставлять доступ к информации игрока
 		client.sendTCP(packet);
 	}
 	

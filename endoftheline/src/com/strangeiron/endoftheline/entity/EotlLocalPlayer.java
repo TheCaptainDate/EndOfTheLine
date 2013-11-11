@@ -10,7 +10,6 @@ public class EotlLocalPlayer extends EotlEntity {
     @Override
     public void tick(float delta, EotlInputManager input) {
         if(character == null) return;
-        
         character.buttons = input.buttons;
     }
 
