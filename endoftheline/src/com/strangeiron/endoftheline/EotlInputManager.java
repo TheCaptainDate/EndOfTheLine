@@ -34,7 +34,6 @@ public class EotlInputManager implements InputProcessor {
 			buttons[button] = down;
 		}
                 
-                System.out.println(button);
                 updated = true;
 	}
 

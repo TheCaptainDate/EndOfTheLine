@@ -51,7 +51,6 @@ public class EotlNetwork {
                        EotlCharacter character = (EotlCharacter) EotlEntityManager.get(packet.charId);
                        character.buttons = packet.buttons;
                        EotlEntityManager.addEntity(character, packet.charId);
-                       System.out.println(packet.charId);
                        return;
                    }
                    
@@ -93,7 +92,7 @@ public class EotlNetwork {
 	public static void sendLoginPacket() 
 	{
 		EotlLoginPacket packet = new EotlLoginPacket();
-		packet.Name = "Player2"; // TODO: система данных, способная хранить и предоставлять доступ к информации игрока
+		packet.Name = "Player1"; // TODO: система данных, способная хранить и предоставлять доступ к информации игрока
 		client.sendTCP(packet);
 	}
 	

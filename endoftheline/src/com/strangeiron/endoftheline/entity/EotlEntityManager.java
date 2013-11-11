@@ -13,10 +13,6 @@ public class EotlEntityManager {
     public static void addEntity(EotlEntity ent, int id)
     {
         entites[id] = ent;
-        System.out.println(ent.getClass().getName());
-        System.out.println(ent.id);
-        if(ent instanceof EotlCharacter)
-            System.out.println("asd: " + ((EotlCharacter)ent).buttons[3]);
     }
 
     public static void tick(float delta, EotlInputManager input)
