@@ -79,4 +79,8 @@ public class EotlEntityManager {
             character.y = Float.parseFloat(data.get("y"));
         }
     }
+
+    public static void synchronization(HashMap<String, String>[] ents) {
+        
+    }
 }

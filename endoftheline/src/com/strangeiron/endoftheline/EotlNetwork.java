@@ -52,13 +52,14 @@ public class EotlNetwork {
                        EotlKeysUpdatePacket packet = (EotlKeysUpdatePacket) object;                     
                        EotlCharacter character = (EotlCharacter) EotlEntityManager.get(packet.charId);
                        character.buttons = packet.buttons;
+                       System.out.println(packet.buttons);
                        return;
                    }
                    
                    if(object instanceof EotlGlobalUpdatePacket)
                    {
                        EotlGlobalUpdatePacket packet = (EotlGlobalUpdatePacket) object;
-                       //EotlEntityManager.sinchronization();
+                       EotlEntityManager.synchronization(packet.ents);
                    }
              }
 
@@ -105,5 +106,7 @@ public class EotlNetwork {
 		kryo.register(EotlEntityUpdatePacket.class);
                 kryo.register(EotlKeysUpdatePacket.class);
                 kryo.register(boolean[].class);
+                kryo.register(HashMap[].class);
+                kryo.register(EotlGlobalUpdatePacket.class);
 	}
 }
