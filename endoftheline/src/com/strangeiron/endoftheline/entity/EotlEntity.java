@@ -26,6 +26,9 @@ public abstract class EotlEntity {
         y = y + yVelocity + Ysync;
         xVelocity = 0;
         yVelocity = 0;
+        
+        Xsync = Xsync / 2;
+        Ysync = Ysync / 2;
     }
     
     public void applyForce(EotlVector2D vector)

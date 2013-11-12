@@ -7,7 +7,7 @@ import com.strangeiron.endoftheline.EndOfTheLine;
 public class EndOfTheLineDesktop {
 	
 	private static final String VERSION = "0.0.1";
-	private static final String BUILD = "1";
+	private static final String BUILD = "3";
 	
 	public static void main(String[] args) {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
