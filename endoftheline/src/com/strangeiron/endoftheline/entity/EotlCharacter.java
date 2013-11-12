@@ -5,8 +5,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.strangeiron.endoftheline.EotlInputManager;
 import com.strangeiron.endoftheline.math.EotlVector2D;
-import static com.strangeiron.endoftheline.screen.EotlGameScreen.shapeRenderer;
-import com.strangeiron.endoftheline.screen.EotlScreen;
 
 public class EotlCharacter extends EotlEntity{
 
@@ -20,10 +18,18 @@ public class EotlCharacter extends EotlEntity{
         }
         
 	@Override
-	public void tick(float delta, EotlInputManager input) {
-            
+	public void tick(float delta, EotlInputManager input) {            
             if(buttons[EotlInputManager.RIGHT]) 
-                this.applyForce(new EotlVector2D(100, 0).multiply(delta));
+                this.applyForce(new EotlVector2D(10, 0).multiply(delta));
+            
+            if(buttons[EotlInputManager.LEFT]) 
+                this.applyForce(new EotlVector2D(-10, 0).multiply(delta));
+            
+            if(buttons[EotlInputManager.UP]) 
+                this.applyForce(new EotlVector2D(0, 10).multiply(delta));
+            
+            if(buttons[EotlInputManager.DOWN]) 
+                this.applyForce(new EotlVector2D(0, -10).multiply(delta));
 	}
 
 	@Override

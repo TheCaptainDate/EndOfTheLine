@@ -1,6 +1,7 @@
 package com.strangeiron.endoftheline.entity;
 
 import com.strangeiron.endoftheline.EotlInputManager;
+import com.strangeiron.endoftheline.EotlNetwork;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -74,6 +75,15 @@ public class EotlEntityManager {
     }
 
     public static void synchronization(HashMap<String, String>[] ents) {
-        
+        for (int i = 0; i < ents.length; i++) {
+            HashMap<String, String> hashMap = ents[i];
+            
+            if(hashMap == null) continue;
+            int id = Integer.parseInt(hashMap.get("id"));
+            float Xsync = (Float.parseFloat(hashMap.get("x")) - entites[id].x) / EotlNetwork.ticksToGlobalUpdate;
+            float Ysync = (Float.parseFloat(hashMap.get("y")) - entites[id].y) / EotlNetwork.ticksToGlobalUpdate;
+            entites[id].Xsync = Xsync;
+            entites[id].Ysync = Ysync;
+        }
     }
 }

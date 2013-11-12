@@ -11,6 +11,8 @@ public abstract class EotlEntity {
     public float xVelocity;
     public float yVelocity;
     public boolean initiated;
+    public float Xsync;
+    public float Ysync;
 
     public void _init()
     {
@@ -20,16 +22,16 @@ public abstract class EotlEntity {
     
     public void _tick(float delta, EotlInputManager input)
     {
-        x = x + xVelocity;
-        y = y + yVelocity;
+        x = x + xVelocity + Xsync;
+        y = y + yVelocity + Ysync;
         xVelocity = 0;
         yVelocity = 0;
     }
     
     public void applyForce(EotlVector2D vector)
     {
-        this.xVelocity = vector.getX();
-        this.yVelocity = vector.getY();
+        this.xVelocity = this.xVelocity + vector.getX();
+        this.yVelocity = this.yVelocity + vector.getY();
     }
 
     public abstract void tick(float delta, EotlInputManager input);

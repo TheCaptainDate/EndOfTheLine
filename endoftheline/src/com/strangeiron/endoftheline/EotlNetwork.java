@@ -19,6 +19,7 @@ import com.strangeiron.endoftheline.protocol.EotlLoginPacket;
 
 public class EotlNetwork {
 	private static Client client;
+        public static int ticksToGlobalUpdate = 10;
 	
 	public static void init()
 	{
@@ -58,6 +59,7 @@ public class EotlNetwork {
                    {
                        EotlGlobalUpdatePacket packet = (EotlGlobalUpdatePacket) object;
                        EotlEntityManager.synchronization(packet.ents);
+                       ticksToGlobalUpdate = 10;
                    }
              }
 
@@ -77,6 +79,8 @@ public class EotlNetwork {
                 packet.charId = EotlEntityManager.localPlayer.character.id;
                 client.sendTCP(packet);
             }
+            
+            ticksToGlobalUpdate--;
         }
 	
 	public static void connect(String host, int port) 
