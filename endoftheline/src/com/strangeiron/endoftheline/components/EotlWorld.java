@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -32,20 +33,21 @@ public class EotlWorld {
     
     public void init()
     {
-        world = new World(new Vector2(0, -40), true);
+        world = new World(new Vector2(0, 40), true);
         renderer = new Box2DDebugRenderer();
         
         projection = new Matrix4(); // debug, @TODO: CAMERA!
         projection.setToOrtho(0, 1280, 800, 0, -1, 1);
         
         // debug, @TODO: REMOVE!
-        float y1 = 1; 
-        float y2 = y1;
-        for (int i = 0; i < 50; i++) {
-                Body ground = createEdge(BodyType.StaticBody, -50 + i * 2, y1, -50 + i * 2 + 2, y2, 0);
-                y1 = y2;
-                y2 = 1; 
-        }
+        Body ground = createEdge(BodyType.StaticBody, 0, 790, 1280,790, 1);
+        
+        for (int i = 0; i < 20; i++) {
+			Body circle = createCircle(BodyType.DynamicBody, (float)Math.random() * 10f, 3);
+			circle.setTransform((float)Math.random() * 1280f - (float)Math.random() * 1280f, (float)Math.random() * 790f + 11f,
+				(float)(Math.random() * 2 * Math.PI));
+                        circle.setBullet(true);
+		}
     }
     
     public  void update() 
@@ -71,6 +73,20 @@ public class EotlWorld {
         poly.set(new Vector2(0, 0), new Vector2(x2 - x1, y2 - y1));
         box.createFixture(poly, density);
         box.setTransform(x1, y1, 0);
+        poly.dispose();
+
+        return box;
+    }
+    
+    
+    public Body createCircle (BodyType type, float radius, float density) {
+        BodyDef def = new BodyDef();
+        def.type = type;
+        Body box = world.createBody(def);
+
+        CircleShape poly = new CircleShape();
+        poly.setRadius(radius);
+        box.createFixture(poly, density);
         poly.dispose();
 
         return box;
