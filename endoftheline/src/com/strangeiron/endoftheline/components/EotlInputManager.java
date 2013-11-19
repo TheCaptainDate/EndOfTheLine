@@ -1,5 +1,5 @@
 
-package com.strangeiron.endoftheline;
+package com.strangeiron.endoftheline.components;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;

@@ -1,4 +1,4 @@
-package com.strangeiron.endoftheline;
+package com.strangeiron.endoftheline.components;
 
 import java.io.EOFException;
 import java.io.IOException;
