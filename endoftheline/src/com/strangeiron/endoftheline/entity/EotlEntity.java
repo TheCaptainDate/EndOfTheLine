@@ -1,7 +1,7 @@
 // base entity
 package com.strangeiron.endoftheline.entity;
 
-import com.strangeiron.endoftheline.components.EotlInputManager;
+import com.strangeiron.endoftheline.EotlInputManager;
 import com.strangeiron.endoftheline.math.EotlVector2D;
 
 public abstract class EotlEntity {

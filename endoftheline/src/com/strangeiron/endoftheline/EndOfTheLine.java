@@ -1,9 +1,6 @@
 
 package com.strangeiron.endoftheline;
 
-import com.strangeiron.endoftheline.components.EotlNetwork;
-import com.strangeiron.endoftheline.components.EotlInputManager;
-import com.strangeiron.endoftheline.components.EotlResourcesManager;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;

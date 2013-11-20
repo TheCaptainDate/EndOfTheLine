@@ -1,6 +1,6 @@
 package com.strangeiron.endoftheline.entity;
 
-import com.strangeiron.endoftheline.components.EotlInputManager;
+import com.strangeiron.endoftheline.EotlInputManager;
 
 
 public class EotlLocalPlayer extends EotlEntity {

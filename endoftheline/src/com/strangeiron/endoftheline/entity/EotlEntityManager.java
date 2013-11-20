@@ -1,7 +1,7 @@
 package com.strangeiron.endoftheline.entity;
 
-import com.strangeiron.endoftheline.components.EotlInputManager;
-import com.strangeiron.endoftheline.components.EotlNetwork;
+import com.strangeiron.endoftheline.EotlInputManager;
+import com.strangeiron.endoftheline.EotlNetwork;
 import java.util.HashMap;
 import java.util.HashSet;
 

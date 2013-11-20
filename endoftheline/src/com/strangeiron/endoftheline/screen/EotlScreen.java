@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
 import com.strangeiron.endoftheline.EndOfTheLine;
-import com.strangeiron.endoftheline.components.EotlInputManager;
+import com.strangeiron.endoftheline.EotlInputManager;
 
 public abstract class EotlScreen {
 	protected static Random random = new Random();
