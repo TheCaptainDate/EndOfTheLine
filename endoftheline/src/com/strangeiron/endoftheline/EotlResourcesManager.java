@@ -22,4 +22,9 @@ public class EotlResourcesManager {
 		
 		font = new BitmapFont(Gdx.files.internal("fonts/menu.fnt"), Gdx.files.internal("fonts/menu.png"), true);
 	}
+        
+        public static void loadModel()
+        {
+            
+        }
 }
