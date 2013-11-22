@@ -44,7 +44,6 @@ public class EotlEntityManager {
     public static void registerEntity(HashMap<String, String> data) {
         // @TODO: enum?!
         String type = data.get("type");
-        System.out.println(data.toString());
         if(type.equals("Character"))
         {
             EotlCharacter character = new EotlCharacter();
@@ -59,8 +58,10 @@ public class EotlEntityManager {
         if(type.equals("LocalCharacter"))
         {
             EotlCharacter character = new EotlCharacter();
+            
             character.x = Float.parseFloat(data.get("x"));
             character.y = Float.parseFloat(data.get("y"));
+            
             character.id = Integer.parseInt(data.get("id"));
             
             localPlayer.character = character;
@@ -80,10 +81,11 @@ public class EotlEntityManager {
             
             if(hashMap == null) continue;
             int id = Integer.parseInt(hashMap.get("id"));
+            System.out.println(hashMap.get("x"));
             float Xsync = (Float.parseFloat(hashMap.get("x")) - entites[id].x) / EotlNetwork.ticksToGlobalUpdate;
             float Ysync = (Float.parseFloat(hashMap.get("y")) - entites[id].y) / EotlNetwork.ticksToGlobalUpdate;
-            //entites[id].Xsync = Xsync;
-            //entites[id].Ysync = Ysync;
+            entites[id].Xsync = Xsync;
+            entites[id].Ysync = Ysync;
         }
     }
 }

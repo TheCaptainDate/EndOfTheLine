@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.strangeiron.endoftheline.EotlInputManager;
 import com.strangeiron.endoftheline.EotlNetwork;
-import com.strangeiron.endoftheline.components.EotlWorld;
+import com.strangeiron.endoftheline.EotlWorld;
 import com.strangeiron.endoftheline.entity.EotlEntityManager;
 import com.strangeiron.endoftheline.entity.EotlLocalPlayer;
 

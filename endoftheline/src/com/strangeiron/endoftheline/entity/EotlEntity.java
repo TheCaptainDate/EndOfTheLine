@@ -7,26 +7,28 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.strangeiron.endoftheline.EotlInputManager;
 import com.strangeiron.endoftheline.EotlResourcesManager;
 import com.strangeiron.endoftheline.components.Eotl2DModel;
-import com.strangeiron.endoftheline.components.EotlWorld;
-import com.strangeiron.endoftheline.math.EotlVector2D;
+import com.strangeiron.endoftheline.EotlWorld;
 
 public abstract class EotlEntity {
     public int id;
     public boolean initiated;
-    public float x;
-    public float y;
+    public float x = 0f;
+    public float y = 0f;
     
     private BodyDef bodyDef;
-    private boolean spawned;
+    private boolean spawned = false;
     public Body physObject;
     public Eotl2DModel model;
+    
+    // sync stuf
+    public float Xsync;
+    public float Ysync;
+    private final Vector2 syncVec = new Vector2();
 
     public void _init()
     {
         bodyDef = new BodyDef();
-        bodyDef.position.set(0f, 0f);
-        
-        
+        bodyDef.position.set(x, y);
         
         // now real init
         initiated = true;
@@ -39,6 +41,14 @@ public abstract class EotlEntity {
         {
             x = physObject.getPosition().x;
             y = physObject.getPosition().y;
+            
+            // Sync
+            syncVec.set(Xsync, Ysync);
+            //physObject.applyForce(syncVec, physObject.getPosition(), false);
+            
+            //Xsync = Xsync / 2;
+            //Ysync = Ysync / 2; // @TODO: Wrong way!
+            physObject.setTransform(syncVec, physObject.getAngle());
         }
     }
     
@@ -64,9 +74,9 @@ public abstract class EotlEntity {
         if(!spawned) bodyDef.position.set(vec); else physObject.setTransform(vec, physObject.getAngle());
     }
     
-        public  void setPosition(float x, float y)
+    public  void setPosition(float newX, float newY)
     {
-        if(!spawned) bodyDef.position.set(x, y); else physObject.setTransform(x, y, physObject.getAngle());
+        if(!spawned) bodyDef.position.set(newX, newY); else physObject.setTransform(newX, newY, physObject.getAngle());
     }
 
     public abstract void tick(float delta, EotlInputManager input);

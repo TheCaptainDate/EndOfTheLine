@@ -1,12 +1,9 @@
 package com.strangeiron.endoftheline.entity;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.strangeiron.endoftheline.EotlInputManager;
-import com.strangeiron.endoftheline.math.EotlVector2D;
 
 public class EotlCharacter extends EotlEntity{
 
