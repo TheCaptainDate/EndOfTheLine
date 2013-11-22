@@ -3,6 +3,8 @@ package com.strangeiron.endoftheline.entity;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.strangeiron.endoftheline.EotlInputManager;
 import com.strangeiron.endoftheline.math.EotlVector2D;
 
@@ -15,21 +17,25 @@ public class EotlCharacter extends EotlEntity{
         public void init()
         {
             shapeRenderer = new ShapeRenderer();
+            setPhysicsType(BodyDef.BodyType.DynamicBody);
+            setModel("test.mdl");
+            setPosition(40, 40);
+            spawn();
         }
         
 	@Override
 	public void tick(float delta, EotlInputManager input) {            
             if(buttons[EotlInputManager.RIGHT]) 
-                this.applyForce(new EotlVector2D(10, 0).multiply(delta));
+                physObject.applyForce(new Vector2(1000, 0).scl(delta), physObject.getPosition(), true);
             
             if(buttons[EotlInputManager.LEFT]) 
-                this.applyForce(new EotlVector2D(-10, 0).multiply(delta));
+                physObject.applyForce(new Vector2(-1000, 0).scl(delta), physObject.getPosition(), true);
             
             if(buttons[EotlInputManager.UP]) 
-                this.applyForce(new EotlVector2D(0, 10).multiply(delta));
+                physObject.applyForce(new Vector2(0, 1000).scl(delta), physObject.getPosition(), true);
             
             if(buttons[EotlInputManager.DOWN]) 
-                this.applyForce(new EotlVector2D(0, -10).multiply(delta));
+                physObject.applyForce(new Vector2(0, -1000).scl(delta), physObject.getPosition(), true);
 	}
 
 	@Override

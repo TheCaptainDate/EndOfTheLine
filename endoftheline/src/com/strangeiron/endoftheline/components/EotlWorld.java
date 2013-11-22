@@ -20,13 +20,13 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class EotlWorld {
     
-    private static World b2dworld;
+    public static World b2dworld;
     private static Box2DDebugRenderer renderer;
     private static Matrix4 projection;
     
     public static void init()
     {
-        b2dworld = new World(new Vector2(0, 40), true);
+        b2dworld = new World(new Vector2(0, 0), true);
         renderer = new Box2DDebugRenderer();
         
         projection = new Matrix4(); // debug, @TODO: CAMERA!
@@ -41,7 +41,7 @@ public class EotlWorld {
         b2dworld.step(Gdx.graphics.getDeltaTime(), 4, 4);
     }
     
-    public void render(SpriteBatch batch)
+    public static void render(SpriteBatch batch)
     {
         renderer.render(b2dworld, projection);
     }

@@ -82,8 +82,8 @@ public class EotlEntityManager {
             int id = Integer.parseInt(hashMap.get("id"));
             float Xsync = (Float.parseFloat(hashMap.get("x")) - entites[id].x) / EotlNetwork.ticksToGlobalUpdate;
             float Ysync = (Float.parseFloat(hashMap.get("y")) - entites[id].y) / EotlNetwork.ticksToGlobalUpdate;
-            entites[id].Xsync = Xsync;
-            entites[id].Ysync = Ysync;
+            //entites[id].Xsync = Xsync;
+            //entites[id].Ysync = Ysync;
         }
     }
 }

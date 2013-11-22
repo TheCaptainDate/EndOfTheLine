@@ -48,13 +48,11 @@ public class EndOfTheLine implements ApplicationListener {
 		while (accum > 1.0f / 60.0f) {
 			screen.tick(input);
 			EotlNetwork.tick(input);
-			EotlEntityManager.tick(Gdx.graphics.getDeltaTime(), input);
                         input.tick();
 			accum -= 1.0f / 60.0f;
                     
 		}
 		screen.render();
-		EotlEntityManager.render();
 		
 		screen.spriteBatch.begin();
 		EotlResourcesManager.font.draw(screen.spriteBatch, "fps: " + Gdx.graphics.getFramesPerSecond(), 5, 10);
