@@ -91,6 +91,27 @@ public class Eotl2DModel implements Cloneable {
         generateCollider(Scale);
     }
     
+    public void setRestitution(float restitution)
+    {
+        for (int i = 0; i < fixtures.size(); i++) {
+            fixtures.get(i).restitution = restitution;
+        }
+    }
+    
+    public void setFriction(float friction)
+    {
+        for (int i = 0; i < fixtures.size(); i++) {
+            fixtures.get(i).friction = friction;
+        }
+    }
+    
+    public void setDensity(float density)
+    {
+        for (int i = 0; i < fixtures.size(); i++) {
+            fixtures.get(i).density = density;
+        }
+    }
+    
     @Override
     public Eotl2DModel clone() throws CloneNotSupportedException {
         return (Eotl2DModel) super.clone();

@@ -19,6 +19,7 @@ public class EotlCharacter extends EotlEntity{
             shapeRenderer = new ShapeRenderer();
             setPhysicsType(BodyDef.BodyType.DynamicBody);
             setModel("test.mdl");
+            model.setRestitution(1f);
             model.scale(300f);
             setPosition(40, 40);
             spawn();
