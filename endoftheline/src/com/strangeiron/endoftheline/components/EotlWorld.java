@@ -20,21 +20,13 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class EotlWorld {
     
-    private World world;
-    private Box2DDebugRenderer renderer;
-    private Matrix4 projection;
+    private static World b2dworld;
+    private static Box2DDebugRenderer renderer;
+    private static Matrix4 projection;
     
-    /**
-     * Инициализирует игровой мир
-     */
-    public EotlWorld()
+    public static void init()
     {
-        init(); // --> WTF?!
-    }
-    
-    public void init()
-    {
-        world = new World(new Vector2(0, 40), true);
+        b2dworld = new World(new Vector2(0, 40), true);
         renderer = new Box2DDebugRenderer();
         
         projection = new Matrix4(); // debug, @TODO: CAMERA!
@@ -42,33 +34,26 @@ public class EotlWorld {
         
         // debug, @TODO: REMOVE!
         Body ground = createEdge(BodyType.StaticBody, 0, 790, 1280,790, 1);
-        
-        for (int i = 0; i < 20; i++) {
-			Body circle = createCircle(BodyType.DynamicBody, (float)Math.random() * 10f, 3);
-			circle.setTransform((float)Math.random() * 1280f - (float)Math.random() * 1280f, (float)Math.random() * 790f + 11f,
-				(float)(Math.random() * 2 * Math.PI));
-                        circle.setBullet(true);
-		}
     }
     
-    public  void update() 
+    public static void update() 
     {
-        world.step(Gdx.graphics.getDeltaTime(), 4, 4);
+        b2dworld.step(Gdx.graphics.getDeltaTime(), 4, 4);
     }
     
     public void render(SpriteBatch batch)
     {
-        renderer.render(world, projection);
+        renderer.render(b2dworld, projection);
     }
     
     /* Physics goes here: 
     @TODO: сделать для физики отдельный враппер?!
     */
     
-    public Body createEdge (BodyType type, float x1, float y1, float x2, float y2, float density) {
+    public static Body createEdge (BodyType type, float x1, float y1, float x2, float y2, float density) {
         BodyDef def = new BodyDef();
         def.type = type;
-        Body box = world.createBody(def);
+        Body box = b2dworld.createBody(def);
 
         EdgeShape poly = new EdgeShape();
         poly.set(new Vector2(0, 0), new Vector2(x2 - x1, y2 - y1));
@@ -80,10 +65,10 @@ public class EotlWorld {
     }
     
     
-    public Body createCircle (BodyType type, float radius, float density) {
+    public static Body createCircle (BodyType type, float radius, float density) {
         BodyDef def = new BodyDef();
         def.type = type;
-        Body box = world.createBody(def);
+        Body box = b2dworld.createBody(def);
 
         CircleShape poly = new CircleShape();
         poly.setRadius(radius);
