@@ -5,23 +5,33 @@
 package com.strangeiron.endoftheline.components;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.strangeiron.endoftheline.physics.CircleModel;
 import com.strangeiron.endoftheline.physics.PolygonModel;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EotlModelsHandler {
     
     private static JsonReader reader = new JsonReader();
+    private final static List<Eotl2DModel> modelsList = new ArrayList<Eotl2DModel>();
+    private static Eotl2DModel model;
     
-    public static void handle(String modelPath)
+    public static Eotl2DModel handle(String modelPath)
     {
-        JsonValue models = reader.parse(Gdx.files.internal("models/" + modelPath)).get("rigidBodies");
+        FileHandle file = Gdx.files.internal("models/" + modelPath);
+        
+        if(!file.exists()) throw new RuntimeException("File \"models/" + modelPath + "\" was not found.");
+        
+        JsonValue models = reader.parse(file).get("rigidBodies");
+        
         
         for (JsonValue.JsonIterator modelsIterator = models.iterator(); modelsIterator.hasNext();) {
             JsonValue modelData = modelsIterator.next();
-            Eotl2DModel model = new Eotl2DModel();
+            model = new Eotl2DModel();
             
             model.name = modelData.getString("name");
             model.texture = modelData.getString("imagePath");
@@ -62,8 +72,8 @@ public class EotlModelsHandler {
                 circle.radius = circleData.getFloat("r");
             }
             
-            // Теперь строим 2д модель
-            model.init(); 
         }
+        
+        return model;
     }
 }
