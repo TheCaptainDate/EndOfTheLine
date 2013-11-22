@@ -72,6 +72,7 @@ public class EotlModelsHandler {
                 circle.radius = circleData.getFloat("r");
             }
             
+            model.init();
         }
         
         return model;

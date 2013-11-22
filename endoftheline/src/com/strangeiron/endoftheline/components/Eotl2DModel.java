@@ -30,6 +30,11 @@ public class Eotl2DModel implements Cloneable {
     {
         
     }
+    
+    public void init()
+    {
+        generateCollider(1f);
+    }
 
     public void applyToBody(Body body)
     {
