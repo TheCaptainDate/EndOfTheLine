@@ -22,7 +22,6 @@ public class Eotl2DModel implements Cloneable {
     public final List<PolygonModel> polygons = new ArrayList<PolygonModel>();
     public final List<CircleModel> circles = new ArrayList<CircleModel>();
     private final List<Vector2> vectorPool = new ArrayList<Vector2>();
-    private final PolygonShape polygonShape = new PolygonShape();
     private final CircleShape circleShape = new CircleShape();
     private final List<FixtureDef> fixtures = new ArrayList<FixtureDef>();
     
@@ -38,9 +37,6 @@ public class Eotl2DModel implements Cloneable {
 
     public void applyToBody(Body body)
     {
-        for (int i = 0; i < body.getFixtureList().size; i++) {
-            body.destroyFixture(body.getFixtureList().get(i));
-        }
         for (int i = 0; i < fixtures.size(); i++) {
             body.createFixture(fixtures.get(i));
         }
@@ -48,7 +44,7 @@ public class Eotl2DModel implements Cloneable {
     
     public void generateCollider(float Scale)
     {
-        Vector2 origincaled = origin.scl(Scale);
+        Vector2 originScaled = origin.scl(Scale);
         
         for (int i = 0; i < polygons.size(); i++) {
             PolygonModel polygon = polygons.get(i);
@@ -56,9 +52,10 @@ public class Eotl2DModel implements Cloneable {
             
             for (int j = 0; j < vertices.length; j++) {
                 vertices[j] = newVec().set(polygon.vertices.get(j)).scl(Scale);
-                vertices[j].sub(origincaled);
+                vertices[j].sub(originScaled);
             }
             
+            PolygonShape polygonShape = new PolygonShape();
             polygonShape.set(vertices);
             
             FixtureDef fd = new FixtureDef();
@@ -89,9 +86,9 @@ public class Eotl2DModel implements Cloneable {
         scale = Scale;
     }
     
-    public void scale()
+    public void scale(float Scale)
     {
-        generateCollider(scale);
+        generateCollider(Scale);
     }
     
     @Override

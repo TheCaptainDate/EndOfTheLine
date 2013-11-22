@@ -19,6 +19,7 @@ public class EotlCharacter extends EotlEntity{
             shapeRenderer = new ShapeRenderer();
             setPhysicsType(BodyDef.BodyType.DynamicBody);
             setModel("test.mdl");
+            model.scale(300f);
             setPosition(40, 40);
             spawn();
         }
@@ -40,10 +41,10 @@ public class EotlCharacter extends EotlEntity{
 
 	@Override
 	public void render() {
-            shapeRenderer.begin(ShapeType.Filled);
-            shapeRenderer.setColor(Color.GREEN);
-            shapeRenderer.rect(x, y, 10f, 10f);
-            shapeRenderer.end();
+            //shapeRenderer.begin(ShapeType.Filled);
+            //shapeRenderer.setColor(Color.GREEN);
+            //shapeRenderer.rect(x, y, 10f, 10f);
+            //shapeRenderer.end();
 	}
 	
 }

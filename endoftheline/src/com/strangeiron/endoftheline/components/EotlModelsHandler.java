@@ -71,10 +71,9 @@ public class EotlModelsHandler {
                 circle.center.y = circleData.getFloat("cy");
                 circle.radius = circleData.getFloat("r");
             }
-            
-            model.init();
         }
         
+        model.init();
         return model;
     }
 }

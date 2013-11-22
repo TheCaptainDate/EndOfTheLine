@@ -19,7 +19,7 @@ public abstract class EotlEntity {
     private BodyDef bodyDef;
     private boolean spawned;
     public Body physObject;
-    private Eotl2DModel model;
+    public Eotl2DModel model;
 
     public void _init()
     {

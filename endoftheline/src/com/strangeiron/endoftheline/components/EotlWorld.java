@@ -28,6 +28,7 @@ public class EotlWorld {
     {
         b2dworld = new World(new Vector2(0, 0), true);
         renderer = new Box2DDebugRenderer();
+        renderer.setDrawVelocities(true);
         
         projection = new Matrix4(); // debug, @TODO: CAMERA!
         projection.setToOrtho(0, 1280, 800, 0, -1, 1);
