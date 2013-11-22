@@ -7,6 +7,8 @@ import com.strangeiron.endoftheline.components.EotlModelsHandler;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class EotlResourcesManager {
 	
@@ -32,12 +34,20 @@ public class EotlResourcesManager {
         public static Eotl2DModel getModel(String path)
         {
             if(models.containsKey(path)) {
-                return models.get(path);
+                try {
+                    return models.get(path).clone();
+                } catch (CloneNotSupportedException ex) {
+                    // @TODO: ERROR
+                }
             }
             
             if(loadModel(path))
             {
-                return models.get(path);
+                try {
+                    return models.get(path).clone();
+                } catch (CloneNotSupportedException ex) {
+                    // @TODO: ERROR
+                }
             }
             
             throw new RuntimeException("Model \"models/" + path + "\" was not found."); // @TODO: сделать, чтобы не крашило, а выводило ошибку!!!

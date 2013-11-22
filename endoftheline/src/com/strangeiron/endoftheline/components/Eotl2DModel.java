@@ -11,6 +11,8 @@ import com.strangeiron.endoftheline.physics.CircleModel;
 import com.strangeiron.endoftheline.physics.PolygonModel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Eotl2DModel implements Cloneable {
     public String name;
@@ -88,8 +90,8 @@ public class Eotl2DModel implements Cloneable {
     }
     
     @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public Eotl2DModel clone() throws CloneNotSupportedException {
+        return (Eotl2DModel) super.clone();
     }
     
     /**
