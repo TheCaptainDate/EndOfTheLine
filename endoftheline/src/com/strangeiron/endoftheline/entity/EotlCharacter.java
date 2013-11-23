@@ -16,7 +16,8 @@ public class EotlCharacter extends EotlEntity{
             shapeRenderer = new ShapeRenderer();
             setPhysicsType(BodyDef.BodyType.DynamicBody);
             setModel("test.mdl");
-            model.setRestitution(1f);
+            //model.setRestitution(1f);
+            //model.setFriction(1f);
             model.scale(300f);
             setPosition(40, 40);
             spawn();
@@ -25,16 +26,16 @@ public class EotlCharacter extends EotlEntity{
 	@Override
 	public void tick(float delta, EotlInputManager input) {            
             if(buttons[EotlInputManager.RIGHT]) 
-                physObject.applyForce(new Vector2(1000, 0).scl(delta), physObject.getPosition(), true);
+                applyForce(new Vector2(1000, 0).scl(delta));
             
             if(buttons[EotlInputManager.LEFT]) 
-                physObject.applyForce(new Vector2(-1000, 0).scl(delta), physObject.getPosition(), true);
+                applyForce(new Vector2(-1000, 0).scl(delta));
             
             if(buttons[EotlInputManager.UP]) 
-                physObject.applyForce(new Vector2(0, 1000).scl(delta), physObject.getPosition(), true);
+               applyForce(new Vector2(0, 1000).scl(delta));
             
             if(buttons[EotlInputManager.DOWN]) 
-                physObject.applyForce(new Vector2(0, -1000).scl(delta), physObject.getPosition(), true);
+               applyForce(new Vector2(0, -1000).scl(delta));
 	}
 
 	@Override

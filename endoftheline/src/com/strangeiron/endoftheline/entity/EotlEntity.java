@@ -8,6 +8,8 @@ import com.strangeiron.endoftheline.EotlInputManager;
 import com.strangeiron.endoftheline.EotlResourcesManager;
 import com.strangeiron.endoftheline.components.Eotl2DModel;
 import com.strangeiron.endoftheline.EotlWorld;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class EotlEntity {
     public int id;
@@ -24,6 +26,7 @@ public abstract class EotlEntity {
     public float Xsync;
     public float Ysync;
     private final Vector2 syncVec = new Vector2();
+    private final List<Vector2> forces = new ArrayList<Vector2>();
 
     public void _init()
     {
@@ -39,16 +42,36 @@ public abstract class EotlEntity {
     {
         if(spawned)
         {
+            System.out.println(physObject.getLinearVelocity().toString());
+            
             x = physObject.getPosition().x;
             y = physObject.getPosition().y;
             
             // Sync
-            syncVec.set(Xsync, Ysync);
+            //syncVec.set(Xsync, Ysync);
             //physObject.applyForce(syncVec, physObject.getPosition(), false);
             
-            //Xsync = Xsync / 2;
-            //Ysync = Ysync / 2; // @TODO: Wrong way!
-            physObject.setTransform(syncVec, physObject.getAngle());
+            //Xsync = 0;
+            //Ysync = 0; // @TODO: Wrong way!
+            //physObject.setTransform(syncVec, physObject.getAngle());
+            
+            //Sync v2
+            syncVec.set(0f, 0f);
+            
+            if(!forces.isEmpty())
+            {
+
+                for (int i = 0; i < forces.size(); i++) {
+                    syncVec.add(forces.get(i));
+                }
+
+                syncVec.add(Xsync, Ysync);
+                physObject.applyForce(syncVec, physObject.getPosition(), true);
+
+                forces.clear();
+                //Xsync = Xsync / 2;
+                //Ysync = Ysync / 2;
+            }
         }
     }
     
@@ -57,6 +80,11 @@ public abstract class EotlEntity {
         physObject = EotlWorld.b2dworld.createBody(bodyDef);
         model.applyToBody(physObject);
         spawned = true;
+    }
+    
+    public void applyForce(Vector2 force)
+    {
+        forces.add(force);
     }
     
     public void setModel(String modelPath)
