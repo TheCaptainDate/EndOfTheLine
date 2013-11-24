@@ -26,16 +26,16 @@ public class EotlCharacter extends EotlEntity{
 	@Override
 	public void tick(float delta, EotlInputManager input) {            
             if(buttons[EotlInputManager.RIGHT]) 
-                applyForce(new Vector2(1000, 0).scl(delta));
+                applyForce(new Vector2(1000, 0));
             
             if(buttons[EotlInputManager.LEFT]) 
-                applyForce(new Vector2(-1000, 0).scl(delta));
+                applyForce(new Vector2(-1000, 0));
             
             if(buttons[EotlInputManager.UP]) 
-               applyForce(new Vector2(0, 1000).scl(delta));
+               applyForce(new Vector2(0, 1000));
             
             if(buttons[EotlInputManager.DOWN]) 
-               applyForce(new Vector2(0, -1000).scl(delta));
+               applyForce(new Vector2(0, -1000));
 	}
 
 	@Override

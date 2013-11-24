@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.strangeiron.endoftheline.EotlInputManager;
+import com.strangeiron.endoftheline.EotlNetwork;
 import com.strangeiron.endoftheline.EotlResourcesManager;
 import com.strangeiron.endoftheline.components.Eotl2DModel;
 import com.strangeiron.endoftheline.EotlWorld;
@@ -41,12 +42,11 @@ public abstract class EotlEntity {
     public void _tick(float delta, EotlInputManager input)
     {
         if(spawned)
-        {
-            System.out.println(physObject.getLinearVelocity().toString());
-            
+        {   
             x = physObject.getPosition().x;
             y = physObject.getPosition().y;
             
+            Vector2 vel = physObject.getLinearVelocity();
             // Sync
             //syncVec.set(Xsync, Ysync);
             //physObject.applyForce(syncVec, physObject.getPosition(), false);
@@ -56,22 +56,40 @@ public abstract class EotlEntity {
             //physObject.setTransform(syncVec, physObject.getAngle());
             
             //Sync v2
-            syncVec.set(0f, 0f);
             
+            float Xsyncd = physObject.getLinearVelocity().x + Xsync;
+            float Ysyncd = physObject.getLinearVelocity().y + Ysync;
+            
+            System.out.println("X: " + Xsync + " Y: " + Ysync + " Ticks: " + EotlNetwork.ticksToGlobalUpdate + " len: " + physObject.getLinearVelocity().len());
+
             if(!forces.isEmpty())
             {
-
+                syncVec.set(0f, 0f);
+                
                 for (int i = 0; i < forces.size(); i++) {
                     syncVec.add(forces.get(i));
                 }
-
-                syncVec.add(Xsync, Ysync);
-                physObject.applyForce(syncVec, physObject.getPosition(), true);
-
+                
+                syncVec.set(syncVec.scl(delta));
+                
+                physObject.applyLinearImpulse(syncVec, physObject.getPosition(), true);
+                
+                physObject.setLinearVelocity(vel.x + Xsync, vel.y + Ysync);
+                            
                 forces.clear();
-                //Xsync = Xsync / 2;
-                //Ysync = Ysync / 2;
             }
+            
+                vel = physObject.getLinearVelocity();
+                
+                if (Math.abs(vel.x) > 30) {
+                vel.x = Math.signum(vel.x) * 30;
+                    physObject.setLinearVelocity(vel.x, vel.y);
+		}
+                
+                 if (Math.abs(vel.y) > 30) {
+                vel.y = Math.signum(vel.x) * 30;
+                    physObject.setLinearVelocity(vel.x, vel.y);
+		}
         }
     }
     

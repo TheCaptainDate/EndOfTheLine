@@ -84,7 +84,6 @@ public class EotlEntityManager {
             float Xsync = (float) Math.floor((Float.parseFloat(hashMap.get("x")) - entites[id].x));
             float Ysync =  (float) Math.floor((Float.parseFloat(hashMap.get("y")) - entites[id].y));
             
-            System.out.println("X: " + Xsync + " Y: " + Ysync);
             entites[id].Xsync = Xsync;
             entites[id].Ysync = Ysync;
         }
