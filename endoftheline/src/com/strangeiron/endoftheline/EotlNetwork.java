@@ -98,7 +98,7 @@ public class EotlNetwork {
 	public static void sendLoginPacket() 
 	{
 		EotlLoginPacket packet = new EotlLoginPacket();
-		packet.Name = "Player1"; // TODO: система данных, способная хранить и предоставлять доступ к информации игрока
+		packet.Name = "Player_" + System.currentTimeMillis(); // TODO: система данных, способная хранить и предоставлять доступ к информации игрока
 		client.sendTCP(packet);
 	}
 	

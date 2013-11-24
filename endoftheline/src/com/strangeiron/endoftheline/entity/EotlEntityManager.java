@@ -24,6 +24,7 @@ public class EotlEntityManager {
             
             ent._tick(delta, input);
             ent.tick(delta, input);
+            ent._post_tick(delta, input);
         }
     }
 
@@ -81,8 +82,8 @@ public class EotlEntityManager {
             
             if(hashMap == null) continue;
             int id = Integer.parseInt(hashMap.get("id"));
-            float Xsync = (float) Math.floor((Float.parseFloat(hashMap.get("x")) - entites[id].x));
-            float Ysync =  (float) Math.floor((Float.parseFloat(hashMap.get("y")) - entites[id].y));
+            float Xsync = (float) Math.floor((Float.parseFloat(hashMap.get("x")) - entites[id].x) / EotlNetwork.ticksToGlobalUpdate);
+            float Ysync =  (float) Math.floor((Float.parseFloat(hashMap.get("y")) - entites[id].y) / EotlNetwork.ticksToGlobalUpdate);
             
             entites[id].Xsync = Xsync;
             entites[id].Ysync = Ysync;

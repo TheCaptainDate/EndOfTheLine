@@ -1,6 +1,7 @@
 // base entity
 package com.strangeiron.endoftheline.entity;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -45,64 +46,48 @@ public abstract class EotlEntity {
         {   
             x = physObject.getPosition().x;
             y = physObject.getPosition().y;
-            
-            Vector2 vel = physObject.getLinearVelocity();
-            // Sync
-            //syncVec.set(Xsync, Ysync);
-            //physObject.applyForce(syncVec, physObject.getPosition(), false);
-            
-            //Xsync = 0;
-            //Ysync = 0; // @TODO: Wrong way!
-            //physObject.setTransform(syncVec, physObject.getAngle());
-            
-            //Sync v2
-            
-            float Xsyncd = physObject.getLinearVelocity().x + Xsync;
-            float Ysyncd = physObject.getLinearVelocity().y + Ysync;
-            
-            System.out.println("X: " + Xsync + " Y: " + Ysync + " Ticks: " + EotlNetwork.ticksToGlobalUpdate + " len: " + physObject.getLinearVelocity().len());
-
-            if(!forces.isEmpty())
-            {
-                syncVec.set(0f, 0f);
-                
-                for (int i = 0; i < forces.size(); i++) {
-                    syncVec.add(forces.get(i));
-                }
-                
-                syncVec.set(syncVec.scl(delta));
-                
-                physObject.applyLinearImpulse(syncVec, physObject.getPosition(), true);
-                
-                physObject.setLinearVelocity(vel.x + Xsync, vel.y + Ysync);
-                            
-                forces.clear();
-            }
-            
-                vel = physObject.getLinearVelocity();
-                
-                if (Math.abs(vel.x) > 30) {
-                vel.x = Math.signum(vel.x) * 30;
-                    physObject.setLinearVelocity(vel.x, vel.y);
-		}
-                
-                 if (Math.abs(vel.y) > 30) {
-                vel.y = Math.signum(vel.x) * 30;
-                    physObject.setLinearVelocity(vel.x, vel.y);
-		}
         }
+    }
+    
+    public void _post_tick(float delta, EotlInputManager input)
+    {
+        if(spawned)
+        {
+           /* Vector2 vel = physObject.getLinearVelocity();
+            
+           if(Math.abs(vel.x) - Math.abs(Xsync) > 0)
+           {
+                vel.x = vel.x + Xsync;
+           }
+
+           if(Math.abs(vel.y) - Math.abs(Ysync) > 0)
+           {
+                vel.y = vel.y + Ysync;
+           }
+
+           physObject.setLinearVelocity(vel);
+           
+           Ysync = Ysync / 2;
+           Xsync = Xsync / 2;
+        } */
+            
+        physObject.setTransform(physObject.getPosition().x + (Xsync / 2), physObject.getPosition().y + (Ysync / 2), 0f);
+        
+        }
+        System.out.println("XSync: " + Xsync + " YSync: " + Ysync);
     }
     
     public void spawn()
     {
         physObject = EotlWorld.b2dworld.createBody(bodyDef);
         model.applyToBody(physObject);
+        physObject.setTransform(x, y, 0f);
         spawned = true;
     }
     
-    public void applyForce(Vector2 force)
+    public void applyImpulse(Vector2 impulse)
     {
-        forces.add(force);
+        physObject.applyLinearImpulse(impulse.scl(Gdx.graphics.getDeltaTime()), physObject.getPosition(), true);
     }
     
     public void setModel(String modelPath)
