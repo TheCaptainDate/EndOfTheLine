@@ -3,7 +3,6 @@ package com.strangeiron.endoftheline;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.strangeiron.endoftheline.components.Eotl2DModel;
-import com.strangeiron.endoftheline.components.EotlModelsHandler;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

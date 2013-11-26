@@ -2,13 +2,14 @@
  * Данный класс парсит json данные и формирует из них физ. модели.
  */
 
-package com.strangeiron.endoftheline.components;
+package com.strangeiron.endoftheline;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
+import com.strangeiron.endoftheline.components.Eotl2DModel;
 import com.strangeiron.endoftheline.physics.CircleModel;
 import com.strangeiron.endoftheline.physics.PolygonModel;
 import java.util.ArrayList;

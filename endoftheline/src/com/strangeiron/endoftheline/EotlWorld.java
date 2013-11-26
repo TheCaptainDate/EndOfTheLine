@@ -7,6 +7,8 @@ package com.strangeiron.endoftheline;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -15,16 +17,19 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.strangeiron.endoftheline.components.EotlMap;
 
 public class EotlWorld {
     
     public static World b2dworld;
     private static Box2DDebugRenderer renderer;
     private static Matrix4 projection;
+        
+    private static EotlMap map;
     
     public static void init()
     {
-        b2dworld = new World(new Vector2(0, 0), true);
+        b2dworld = new World(new Vector2(0, 10), true);
         renderer = new Box2DDebugRenderer();
         renderer.setDrawVelocities(true);
         
@@ -43,6 +48,16 @@ public class EotlWorld {
     public static void render(SpriteBatch batch)
     {
         renderer.render(b2dworld, projection);
+    }
+    
+    public static void loadMap(String mapName)
+    {
+        if(map != null)
+        {
+            // @todo: delete map data, remove ents, etc
+        }
+        
+        map = new EotlMap(mapName);
     }
     
     /* Physics goes here: 
