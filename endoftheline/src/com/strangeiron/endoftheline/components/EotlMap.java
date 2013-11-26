@@ -20,12 +20,12 @@ public class EotlMap {
     private static final TmxMapLoader mapLoader = new TmxMapLoader();
     
     public EotlMap(String name) {
-        if(!Gdx.files.internal("maps/" + name).exists())
+        if(!Gdx.files.internal("maps/" + name + ".tmx").exists())
         {
             throw new RuntimeException("Can't load map \"" + name + "\": file not found.");
         }
         
-        tiledmap = mapLoader.load("maps/" + name); 
+        tiledmap = mapLoader.load("maps/" + name + ".tmx"); 
         loadCollisions();
     }
     
