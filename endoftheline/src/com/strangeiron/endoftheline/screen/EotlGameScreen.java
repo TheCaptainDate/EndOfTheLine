@@ -19,8 +19,9 @@ public class EotlGameScreen extends EotlScreen {
         
         EotlNetwork.init();
         EotlWorld.init();
-        EotlNetwork.connect("127.0.0.1", 12345); // @TODO: Debug shit ;/
-        EotlNetwork.sendLoginPacket();
+       // EotlNetwork.connect("127.0.0.1", 12345); // @TODO: Debug shit ;/
+        //EotlNetwork.sendLoginPacket();
+        EotlWorld.loadMap("test.tmx");
     }
 
     @Override
