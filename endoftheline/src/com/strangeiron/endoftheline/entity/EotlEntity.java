@@ -20,7 +20,7 @@ public abstract class EotlEntity {
     public float y = 0f;
     
     private BodyDef bodyDef;
-    private boolean spawned = false;
+    public boolean spawned = false;
     public Body physObject;
     public Eotl2DModel model;
     
@@ -29,6 +29,8 @@ public abstract class EotlEntity {
     public float Ysync;
     private final Vector2 syncVec = new Vector2();
     private final List<Vector2> forces = new ArrayList<Vector2>();
+    public float xVel;
+    public float yVel;
 
     public void _init()
     {
@@ -70,9 +72,9 @@ public abstract class EotlEntity {
            Ysync = Ysync / 2;
            Xsync = Xsync / 2;
         } */
-            
-        physObject.setTransform(physObject.getPosition().x + (Xsync / 2), physObject.getPosition().y + (Ysync / 2), 0f);
         
+        physObject.setTransform(physObject.getPosition().x + (Xsync / 2), physObject.getPosition().y + (Ysync / 2), 0f);
+        physObject.setLinearVelocity(xVel, yVel);
         }
         System.out.println("XSync: " + Xsync + " YSync: " + Ysync);
     }
