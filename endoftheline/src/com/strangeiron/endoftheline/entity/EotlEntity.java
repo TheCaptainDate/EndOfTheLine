@@ -10,109 +10,103 @@ import com.strangeiron.endoftheline.EotlNetwork;
 import com.strangeiron.endoftheline.EotlResourcesManager;
 import com.strangeiron.endoftheline.components.Eotl2DModel;
 import com.strangeiron.endoftheline.EotlWorld;
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class EotlEntity {
+
     public int id;
     public boolean initiated;
     public float x = 0f;
     public float y = 0f;
-    
+
     private BodyDef bodyDef;
     public boolean spawned = false;
     public Body physObject;
     public Eotl2DModel model;
-    
+
     // sync stuf
-    public float Xsync;
-    public float Ysync;
-    private final Vector2 syncVec = new Vector2();
-    private final List<Vector2> forces = new ArrayList<Vector2>();
+    public float Xsync = 0f;
+    public float Ysync = 0f;
+    public float targetX = 0f;
+    public float targetY = 0f;
     public float xVel;
     public float yVel;
 
-    public void _init()
-    {
+    public void _init() {
         bodyDef = new BodyDef();
         bodyDef.position.set(x, y);
-        
+
         // now real init
         initiated = true;
         init();
     }
-    
-    public void _tick(float delta, EotlInputManager input)
-    {
-        if(spawned)
-        {   
+
+    public void _tick(float delta, EotlInputManager input) {
+        if (spawned) {
             x = physObject.getPosition().x;
             y = physObject.getPosition().y;
         }
     }
-    
-    public void _post_tick(float delta, EotlInputManager input)
-    {
-        if(spawned)
-        {
-           /* Vector2 vel = physObject.getLinearVelocity();
-            
-           if(Math.abs(vel.x) - Math.abs(Xsync) > 0)
-           {
-                vel.x = vel.x + Xsync;
-           }
 
-           if(Math.abs(vel.y) - Math.abs(Ysync) > 0)
-           {
-                vel.y = vel.y + Ysync;
-           }
+    public void _post_tick(float delta, EotlInputManager input) {
+        if (spawned) {
+            Xsync = (targetX - x);
+            Ysync = (targetY - y);
 
-           physObject.setLinearVelocity(vel);
-           
-           Ysync = Ysync / 2;
-           Xsync = Xsync / 2;
-        } */
-        
-        physObject.setTransform(physObject.getPosition().x + (Xsync / 2), physObject.getPosition().y + (Ysync / 2), 0f);
-        physObject.setLinearVelocity(xVel, yVel);
+            if (Xsync != 0 && EotlNetwork.ticksToGlobalUpdate != 0) {
+                Xsync = Xsync / EotlNetwork.ticksToGlobalUpdate;
+            }
+
+            if (Ysync != 0 && EotlNetwork.ticksToGlobalUpdate != 0) {
+                Ysync = Ysync / EotlNetwork.ticksToGlobalUpdate;
+            }
+
+            physObject.setTransform(physObject.getPosition().x + (Xsync), physObject.getPosition().y + (Ysync), 0f);
+            physObject.setLinearVelocity(xVel, yVel);
         }
-        System.out.println("XSync: " + Xsync + " YSync: " + Ysync);
     }
-    
-    public void spawn()
-    {
+
+    public void spawn() {
         physObject = EotlWorld.b2dworld.createBody(bodyDef);
         model.applyToBody(physObject);
         physObject.setTransform(x, y, 0f);
         spawned = true;
     }
-    
-    public void applyImpulse(Vector2 impulse)
-    {
+
+    public void applyImpulse(Vector2 impulse) {
         physObject.applyLinearImpulse(impulse.scl(Gdx.graphics.getDeltaTime()), physObject.getPosition(), true);
     }
-    
-    public void setModel(String modelPath)
-    {
+
+    public void setModel(String modelPath) {
         model = EotlResourcesManager.getModel(modelPath);
     }
-    
-    public void setPhysicsType(BodyDef.BodyType type)
-    {
-        if(!spawned) bodyDef.type = type; else physObject.setType(type);
-   }
-    
-    public  void setPosition(Vector2 vec)
-    {
-        if(!spawned) bodyDef.position.set(vec); else physObject.setTransform(vec, physObject.getAngle());
+
+    public void setPhysicsType(BodyDef.BodyType type) {
+        if (!spawned) {
+            bodyDef.type = type;
+        } else {
+            physObject.setType(type);
+        }
     }
-    
-    public  void setPosition(float newX, float newY)
-    {
-        if(!spawned) bodyDef.position.set(newX, newY); else physObject.setTransform(newX, newY, physObject.getAngle());
+
+    public void setPosition(Vector2 vec) {
+        if (!spawned) {
+            bodyDef.position.set(vec);
+        } else {
+            physObject.setTransform(vec, physObject.getAngle());
+        }
+    }
+
+    public void setPosition(float newX, float newY) {
+        if (!spawned) {
+            bodyDef.position.set(newX, newY);
+        } else {
+            physObject.setTransform(newX, newY, physObject.getAngle());
+        }
     }
 
     public abstract void tick(float delta, EotlInputManager input);
+
     public abstract void render();
+
     public abstract void init();
 }

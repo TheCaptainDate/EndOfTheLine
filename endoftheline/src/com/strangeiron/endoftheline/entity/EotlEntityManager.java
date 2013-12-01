@@ -82,17 +82,6 @@ public class EotlEntityManager {
             
             if(hashMap == null) continue;
             int id = Integer.parseInt(hashMap.get("id"));
-            float Xsync;
-            float Ysync;  
-            
-            Xsync = (float) Math.floor((Float.parseFloat(hashMap.get("x")) - entites[id].x) / EotlNetwork.ticksToGlobalUpdate);
-            Ysync = (float) Math.floor((Float.parseFloat(hashMap.get("y")) - entites[id].y) / EotlNetwork.ticksToGlobalUpdate);
-            
-            if(Xsync == Float.NEGATIVE_INFINITY || Xsync == Float.POSITIVE_INFINITY || Xsync == Float.NaN)
-            {
-                Xsync = (float) Math.floor((Float.parseFloat(hashMap.get("x")) - entites[id].x));
-                Ysync = (float) Math.floor((Float.parseFloat(hashMap.get("y")) - entites[id].y));
-            }
             
             if(entites[id].spawned)
             {
@@ -100,8 +89,8 @@ public class EotlEntityManager {
                entites[id].yVel = (float) Math.floor(Float.parseFloat(hashMap.get("yVel")));
             }
             
-            entites[id].Xsync = Xsync;
-            entites[id].Ysync = Ysync;
+            entites[id].targetX = Float.parseFloat(hashMap.get("x"));
+            entites[id].targetY = Float.parseFloat(hashMap.get("y"));
         }
     }
 }

@@ -29,9 +29,10 @@ public class EotlWorld {
     
     public static void init()
     {
-        b2dworld = new World(new Vector2(0, 10), true);
+        b2dworld = new World(new Vector2(0, 20), true);
         renderer = new Box2DDebugRenderer();
         renderer.setDrawVelocities(true);
+        renderer.setDrawContacts(true);
         
         projection = new Matrix4(); // debug, @TODO: CAMERA!
         projection.setToOrtho(0, 1280, 800, 0, -1, 1);

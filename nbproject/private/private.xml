@@ -2,14 +2,7 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Максим/Documents/GitHub/EndOfTheLine/endoftheline/src/com/strangeiron/endoftheline/EotlNetwork.java</file>
-            <file>file:/C:/Users/Максим/Documents/GitHub/EndOfTheLine/endoftheline/src/com/strangeiron/endoftheline/components/Eotl2DModel.java</file>
-            <file>file:/C:/Users/Максим/Documents/GitHub/EndOfTheLine/endoftheline/src/com/strangeiron/endoftheline/entity/EotlCharacter.java</file>
-            <file>file:/C:/Users/Максим/Documents/GitHub/EndOfTheLine/endoftheline/src/com/strangeiron/endoftheline/EotlWorld.java</file>
-            <file>file:/C:/Users/Максим/Documents/GitHub/EndOfTheLine/endoftheline/src/com/strangeiron/endoftheline/screen/EotlGameScreen.java</file>
-            <file>file:/C:/Users/Максим/Documents/GitHub/EndOfTheLine/endoftheline/src/com/strangeiron/endoftheline/entity/EotlEntity.java</file>
-            <file>file:/C:/Users/Максим/Documents/GitHub/EndOfTheLine/endoftheline/src/com/strangeiron/endoftheline/entity/EotlEntityManager.java</file>
-        </group>
+        <group/>
+        <group name="EOTL"/>
     </open-files>
 </project-private>
