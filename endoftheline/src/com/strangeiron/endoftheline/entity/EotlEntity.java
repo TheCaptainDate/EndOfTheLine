@@ -103,6 +103,27 @@ public abstract class EotlEntity {
             physObject.setTransform(newX, newY, physObject.getAngle());
         }
     }
+    
+    public void setRestitution(float restitution)
+    {
+        for (int i = 0; i < model.fixtures.size(); i++) {
+            model.fixtures.get(i).setRestitution(restitution);
+        }
+    }
+    
+    public void setFriction(float friction)
+    {
+        for (int i = 0; i < model.fixtures.size(); i++) {
+            model.fixtures.get(i).setFriction(friction);
+        }
+    }
+    
+    public void setDensity(float density)
+    {
+        for (int i = 0; i < model.fixtures.size(); i++) {
+            model.fixtures.get(i).setDensity(density);
+        }
+    }
 
     public abstract void tick(float delta, EotlInputManager input);
 
