@@ -83,6 +83,8 @@ public class EotlEntityManager {
             if(hashMap == null) continue;
             int id = Integer.parseInt(hashMap.get("id"));
             
+            if(entites[id] == null) continue;
+            
             if(entites[id].spawned)
             {
                entites[id].xVel = (float) Math.floor(Float.parseFloat(hashMap.get("xVel")));

@@ -23,10 +23,11 @@ public class EotlInputManager implements InputProcessor {
 		// @TODO: добавить загрузку из конфига!!!
 		int button = -1;
 
-		if (key == Keys.W) button = UP;
+		if (key == Keys.W) button = JUMP;
 		if (key == Keys.A) button = LEFT;
 		if (key == Keys.S) button = DOWN;
 		if (key == Keys.D) button = RIGHT;
+                
 
 		if (key == Keys.ESCAPE || key == Keys.MENU) button = ESCAPE;
 
