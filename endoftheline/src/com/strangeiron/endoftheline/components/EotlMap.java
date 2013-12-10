@@ -23,7 +23,7 @@ public class EotlMap {
         }
 
         tiledmap = mapLoader.load("maps/" + name + ".tmx");
-        //loadCollisions();
+        loadCollisions();
     }
 
     private void loadCollisions() {

@@ -29,7 +29,7 @@ public class EotlWorld {
     
     public static void init()
     {
-        b2dworld = new World(new Vector2(0, 20), true);
+        b2dworld = new World(new Vector2(0, 60), true);
         renderer = new Box2DDebugRenderer();
         renderer.setDrawVelocities(true);
         renderer.setDrawContacts(true);
