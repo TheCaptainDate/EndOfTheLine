@@ -78,6 +78,8 @@ public class EotlNetwork {
             {
                 EotlKeysUpdatePacket packet = new EotlKeysUpdatePacket();
                 packet.buttons = input.buttons;
+                packet.x = input.x;
+                packet.y = input.y;
                 packet.charId = EotlEntityManager.localPlayer.character.id;
                 client.sendTCP(packet);
             }

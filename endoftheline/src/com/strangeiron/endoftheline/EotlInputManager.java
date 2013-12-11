@@ -1,6 +1,7 @@
 
 package com.strangeiron.endoftheline;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 
@@ -11,12 +12,14 @@ public class EotlInputManager implements InputProcessor {
 	public static final int RIGHT = 3;
 
 	public static final int JUMP = 4;
-	public static final int SHOOT = 5;
+	public static final int PRIMARY_SHOT = 5;
+        public static final int SECONDARY_SHOT = 6;
 
 	public static final int ESCAPE = 6;
 
 	public boolean[] buttons = new boolean[64];
 	public boolean[] oldButtons = new boolean[64];
+        public int x, y = 0;
         public boolean updated = false;
 
 	public void set (int key, boolean down) {
@@ -27,6 +30,9 @@ public class EotlInputManager implements InputProcessor {
 		if (key == Keys.A) button = LEFT;
 		if (key == Keys.S) button = DOWN;
 		if (key == Keys.D) button = RIGHT;
+                
+                if(key == Input.Buttons.LEFT) button = PRIMARY_SHOT;
+                if(key == Input.Buttons.RIGHT) button = SECONDARY_SHOT;
                 
 
 		if (key == Keys.ESCAPE || key == Keys.MENU) button = ESCAPE;
@@ -54,30 +60,38 @@ public class EotlInputManager implements InputProcessor {
 
 	@Override
 	public boolean keyDown (int keycode) {
-		set(keycode, true);
-		return false;
+            set(keycode, true);
+            return false;
 	}
 
 	@Override
 	public boolean keyUp (int keycode) {
-		set(keycode, false);
-		return false;
+            set(keycode, false);
+            return false;
 	}
 
 	@Override
 	public boolean keyTyped (char character) {
-		// TODO Auto-generated method stub
-		return false;
+            // TODO Auto-generated method stub
+            return false;
 	}
 
 	@Override
 	public boolean touchDown (int x, int y, int pointer, int button) {
-		return false;
+            set(button, true);
+            this.x = x;
+            this.y = y;
+            
+            return false;
 	}
 
 	@Override
 	public boolean touchUp (int x, int y, int pointer, int button) {
-		return false;
+            set(button, false);
+            this.x = x;
+            this.y = y;
+            
+            return false;
 	}
 
 	@Override
