@@ -25,9 +25,6 @@ public class EotlCharacter extends EotlEntity{
         {
             setPhysicsType(BodyDef.BodyType.DynamicBody);
             setModel("test.mdl");
-            model.setRestitution(1f);
-            model.setFriction(0.5f);
-            
             model.scale(300f);
             setPosition(40, 40);
             spawn();
@@ -35,6 +32,8 @@ public class EotlCharacter extends EotlEntity{
         
 	@Override
 	public void tick(float delta, EotlInputManager input) {    
+            if(!spawned) return;
+            
             Vector2 vel = physObject.getLinearVelocity();
             grounded = isPlayerGrounded();
             
